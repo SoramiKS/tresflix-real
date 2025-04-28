@@ -35,13 +35,20 @@ export default function LoginPage() {
       if (!res.ok) throw new Error(data.message || "Gagal login/daftar");
 
       // Setelah berhasil login atau registrasi, simpan session ke localStorage
-      localStorage.setItem(
+      sessionStorage.setItem("user_token", data.access_token); // ini tambahan
+      if(data.refresh_token) {
+        sessionStorage.setItem('refresh_token', data.refresh_token)
+      }
+      sessionStorage.setItem(
         "userSession",
         JSON.stringify({
-          email,
+          access_token: data.access_token,
+          refresh_token: data.refresh_token,
           name: isRegister ? name : data.name || email.split("@")[0],
+          email,
         })
       );
+      
       router.push("/"); // Redirect ke halaman utama
     } catch (err) {
       const error = err as Error;

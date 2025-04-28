@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const API_BASE_URL = "https://91fb-2a09-bac5-39e4-25af-00-3c1-3.ngrok-free.app";
+const API_BASE_URL = "http://10.10.10.134";
 
 export async function POST(req: NextRequest, { params }: { params: { action: string } }) {
   const { action } = params; // signup atau signin
@@ -14,4 +14,6 @@ export async function POST(req: NextRequest, { params }: { params: { action: str
 
   const data = await res.json();
   return NextResponse.json(data, { status: res.status });
+
+  
 }

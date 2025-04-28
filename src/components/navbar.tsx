@@ -14,7 +14,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const checkSession = () => {
-      const session = localStorage.getItem("userSession");
+      const session = sessionStorage.getItem("userSession");
       if (session) {
         try {
           const user = JSON.parse(session);
@@ -33,7 +33,7 @@ export default function Navbar() {
     // Check session initially
     checkSession();
 
-    // Monitor changes in localStorage (for session updates)
+    // Monitor changes in sessionStorage (for session updates)
     window.addEventListener("storage", checkSession);
 
     // Clean up listener on component unmount
@@ -43,7 +43,7 @@ export default function Navbar() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("userSession");
+    sessionStorage.removeItem("userSession");
     setIsLoggedIn(false);
     setUserName("");
     setMenuOpen(false);
